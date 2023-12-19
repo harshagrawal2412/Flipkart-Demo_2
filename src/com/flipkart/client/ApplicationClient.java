@@ -72,8 +72,11 @@ public class ApplicationClient {
 				break;
 			case 2:
 				CustomerClient customer = new CustomerClient();
-				customer.registerCustomer();
-				login();
+				
+					boolean isRegistered=customer.registerCustomer();
+					if(isRegistered) login();
+					else break;
+				
 				break;
 			case 3:
 				GymOwnerClient owner = new GymOwnerClient();

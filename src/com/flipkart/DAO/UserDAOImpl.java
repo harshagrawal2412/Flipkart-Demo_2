@@ -51,6 +51,8 @@ public class UserDAOImpl implements UserDAO {
 				preparedStatementUser.setString(1, customer.getEmail());
 				preparedStatementUser.setString(2, customer.getPassword());
 				preparedStatementUser.setString(3, "Customer");
+				
+				
 
 				int rowsAffected = preparedStatementUser.executeUpdate();
 				if (rowsAffected != 0)
@@ -68,7 +70,8 @@ public class UserDAOImpl implements UserDAO {
 
 
 		} catch (SQLException e) {
-			printSQLException(e);
+			System.out.println("Email already exists");
+		
 		}
 
 		return registerSuccess;

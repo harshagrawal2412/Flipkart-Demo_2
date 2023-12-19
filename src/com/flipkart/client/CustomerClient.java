@@ -16,7 +16,7 @@ public class CustomerClient {
 	CustomerBusiness customerBusiness = new CustomerBusiness();
 	Scanner sc = new Scanner(System.in);
 
-	public void registerCustomer() {
+	public boolean registerCustomer() {
 		System.out.print("Enter email: ");
 		customer.setEmail(sc.next());
 		System.out.print("Enter password: ");
@@ -30,10 +30,16 @@ public class CustomerClient {
 		System.out.print("Enter Address: ");
 		customer.setAddress(sc.next());
 		UserBusiness userBusiness = new UserBusiness();
-		userBusiness.registerCustomer(customer);
-
-		System.out.println("Customer registered successfully!");
-
+		
+		boolean isRegistered =userBusiness.registerCustomer(customer);
+		if(isRegistered) {
+			System.out.println("Customer registered successfully!");
+			return true;
+		}
+		else {
+			System.out.println("User Already Exists");
+			return false;
+		}
 	}
 
 	public void viewGyms() {
@@ -63,13 +69,13 @@ public class CustomerClient {
 			System.out.println("You have already booked this time. Cancelling the previous one and booking this slot");
 			break;
 		case 1:
-			System.out.println("Slot is already booked, added to the waiting list");
+			System.out.println("Slot is already booked.");
 			break;
 		case 2:
 			System.out.println("Successfully booked the slot");
 			break;
 		case 3:
-			System.out.println("Slot not found");
+			System.out.println("Slot not Exist.");
 			break;
 		default:
 			System.out.println("Booking failed");
@@ -91,13 +97,17 @@ public class CustomerClient {
 	}
 
 	public void getGyms() {
-		List<Gym> gyms = customerBusiness.getGyms();
-		for (Gym gym : gyms) {
-			System.out.print("Gym Id: " + gym.getGymId());
-			System.out.print("Gym Owner Email: " + gym.getOwnerEmail());
-			System.out.print("Gym Name: " + gym.getGymName());
-			System.out.println();
-		}
+	    List<Gym> gyms = customerBusiness.getGyms();
+
+	    // Print table header
+	    System.out.println("+-------------+------------------------+-------------+");
+	    System.out.println("| Gym Id      | Gym Owner Email        | Gym Name    |");
+	    System.out.println("+-------------+------------------------+-------------+");
+	    for (Gym gym : gyms) {
+	        System.out.printf("| %-11s | %-22s | %-11s |%n", gym.getGymId(), gym.getOwnerEmail(), gym.getGymName());
+	        System.out.println("+-------------+------------------------+-------------+");
+	    }
+
 	}
 
 	public void cancelBooking(String email) {

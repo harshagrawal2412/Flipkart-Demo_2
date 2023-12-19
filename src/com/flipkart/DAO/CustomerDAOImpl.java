@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.flipkart.bean.Booking;
+import com.flipkart.bean.Customer;
 import com.flipkart.bean.Gym;
 import com.flipkart.bean.Slot;
 import com.flipkart.exception.*;
@@ -224,5 +225,10 @@ public class CustomerDAOImpl implements CustomerDAO{
 			}
 		}
 	}
+
+//	public Customer getGymOwnerDetails(Customer customer) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 }
